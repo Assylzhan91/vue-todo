@@ -17,9 +17,4 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'VToolbar'
-
-}
-</script>
+<script src="./VToolbar.js"></script>
