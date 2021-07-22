@@ -1,0 +1,28 @@
+.v-toolbar {
+  display: flex;
+
+  &__item {
+    margin-right: 2rem;
+  }
+  &__button {
+    cursor: pointer;
+    color: $vGrey;
+    border-radius: .5rem;
+    background-color: #fff;
+    padding: 1rem 2rem;
+    border: 1px solid grey;
+    outline: none;
+    transition: color .2s;
+
+    &:hover {
+      color: darken($vGrey, 30%);
+      border-color: darken($vGrey, 30%);
+    }
+    &--active {
+     border-color: $vRed;
+   }
+ }
+  &__item:last-child {
+    margin-right: 0;
+  }
+}

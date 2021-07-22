@@ -39,25 +39,14 @@
           </li>
         </ul>
       </div>
-      <div class="v-toolbar">
-        <div class="v-toolbar__item">
-          <button class="v-toolbar__button">All</button>
-        </div>
-        <div class="v-toolbar__item">
-          <button class="v-toolbar__button">Done</button>
-        </div>
-        <div class="v-toolbar__item">
-          <button class="v-toolbar__button">Active</button>
-        </div>
-        <div class="v-toolbar__item v-toolbar__item--rm-all">
-          <button class="v-toolbar__button"><span></span></button>
-        </div>
-      </div>
     </div>
+    <VToolbar/>
   </div>
 </template>
 
 <script>
+import VToolbar from './components/VToolbar'
+
   export default {
     name: 'App',
     data () {
@@ -66,6 +55,8 @@
       }
     },
     computed: {},
-    components: {}
+    components: {
+      VToolbar
+    }
   }
 </script>

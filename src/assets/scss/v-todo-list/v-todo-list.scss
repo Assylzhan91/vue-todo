@@ -42,17 +42,19 @@
   }
 
   &__edit {
-    color: lighten(green, 20%);
+    color: lighten($vGreen, 20%);
+    &:hover {
+      color: lighten($vGreen, 0);
+    }
     &::before {
-      color: lighten(green, 0);
       content: '\f044';
     }
   }
 
   &__remove {
-    color: lighten(red, 20%);
+    color: lighten($vRed, 20%);
     &:hover {
-      color: lighten(red, 0);
+      color: lighten($vRed, 0);
     }
     &::before {
       content: '\f1f8';
