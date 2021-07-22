@@ -28,12 +28,13 @@
         </div>
       </form>
       <div class="v-todo-list-wrapper">
-        <ul class="v-todo-list mt-30">
-          <li class="v-todo-list__item p-20">
-            <span class="v-icon v-todo-list__complete"></span>
-            <span class="v-todo-list__icon"></span>
-            <div class="v-todo-list__text">Feed the cat</div>
-            <span class="v-icon v-todo-list__edit"></span>
+        <ul class="v-todo-list mt-30 mb-30">
+          <li class="v-todo-list__item p-10 mb-10">
+            <div class="v-todo-list__checkbox mr-15">
+              <span class="v-icon v-todo-list__complete m-auto"></span>
+            </div>
+            <div class="v-todo-list__text mr-auto">Feed the cat</div>
+            <span class="v-icon v-todo-list__edit mr-30"></span>
             <span class="v-icon v-todo-list__remove"></span>
           </li>
         </ul>

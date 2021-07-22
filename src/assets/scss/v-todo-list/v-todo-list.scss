@@ -1,16 +1,29 @@
 .v-todo-list {
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 0 1px rgba(#000, .3%), 0 1px 3px rgba(#000, .26%);
+
   &__item {
     display: flex;
-  }
-  &__icon {
+    align-items: center;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 0 1px rgba(#000, .3%), 0 1px 3px rgba(#000, .26%);
+    cursor: pointer;
+    transition: background-color .2s, box-shadow .2s;
 
+    &:hover {
+      background-color: lighten(#000, 90%);
+      box-shadow: 2px 2px 4px 1px rgba(#000, .3%);
+    }
+  }
+
+  &__checkbox {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    box-shadow: 0 0 4px 1px rgba(#000, .5);
   }
 
   &__text {
-    font-size: 32px;
+    font-size: 24px;
     font-style: italic;
   }
 
@@ -18,23 +31,29 @@
   &__edit,
   &__complete {
     font-size: 27px;
-    &::before {
-      color: red;
-    }
   }
+
   &__complete {
+    color: #5a5656;
+    font-size: 16px;
     &::before {
       content: '\f00c';
     }
   }
 
   &__edit {
+    color: lighten(green, 20%);
     &::before {
+      color: lighten(green, 0);
       content: '\f044';
-      color: green;
     }
   }
+
   &__remove {
+    color: lighten(red, 20%);
+    &:hover {
+      color: lighten(red, 0);
+    }
     &::before {
       content: '\f1f8';
     }
