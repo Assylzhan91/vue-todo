@@ -1,0 +1,42 @@
+.v-todo-list {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 0 1px rgba(#000, .3%), 0 1px 3px rgba(#000, .26%);
+  &__item {
+    display: flex;
+  }
+  &__icon {
+
+  }
+
+  &__text {
+    font-size: 32px;
+    font-style: italic;
+  }
+
+  &__remove,
+  &__edit,
+  &__complete {
+    font-size: 27px;
+    &::before {
+      color: red;
+    }
+  }
+  &__complete {
+    &::before {
+      content: '\f00c';
+    }
+  }
+
+  &__edit {
+    &::before {
+      content: '\f044';
+      color: green;
+    }
+  }
+  &__remove {
+    &::before {
+      content: '\f1f8';
+    }
+  }
+}

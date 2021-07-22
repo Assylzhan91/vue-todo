@@ -1,0 +1,21 @@
+.v-header {
+  &__wrapper {
+    background-image: url('../images/night.jpg');
+  }
+
+  &__data {
+    color: #fff;
+    &--day {
+      font-weight: bold;
+      font-size: 36px;
+    }
+    &--month {
+      font-weight: normal;
+      font-size: 27px;
+    }
+  }
+  &-title {
+    font-size: 41px;
+    font-weight: bold;
+  }
+}

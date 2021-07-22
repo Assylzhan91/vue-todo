@@ -1,0 +1,17 @@
+.v-button {
+  white-space: nowrap;
+  cursor: pointer;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-left: -1px;
+  border: 1px solid #ced4da;
+  border-radius: .5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  &:focus,
+  &:focus-visible {
+    border-color: transparent;
+    outline: none;
+    box-shadow: 0 0 5px 2px rgba(152, 159, 165, .5);
+  }
+}

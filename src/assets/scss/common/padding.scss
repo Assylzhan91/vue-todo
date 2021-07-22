@@ -1,0 +1,37 @@
+$padding: pt, pr, pb, pl;
+
+@for $i from 1 through 10 {
+  @each $val in $padding {
+    @if $val == mt {
+      .pt-#{$i*10/2} {
+        margin-top: #{$i * 0.5}rem;
+      }
+    }
+
+    @else if $val == mr {
+      .pr-#{$i*10/2} {
+        margin-right: #{$i * 0.5}rem;
+      }
+    }
+
+    @else if $val == mb {
+      .pb-#{$i*10/2} {
+        margin-bottom: #{$i * 0.5}rem;
+      }
+    }
+
+    @else if $val == ml {
+      .pl-#{$i*10/2} {
+        margin-bottom: #{$i * 0.5}rem;
+      }
+    }
+
+  }
+}
+
+@for $i from 1 through 6 {
+  .p-#{$i*10/2} {
+    padding: #{$i*.5}rem;
+  }
+}
+
