@@ -1,0 +1,59 @@
+.v-header-title {
+    font-size: 41px;
+    font-weight: bold;
+  &__wrapper {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    line-height: 5rem;
+    height: 5rem;
+    &:hover {
+      .v-icon {
+        //display: block;
+      }
+    }
+  }
+
+  &__edit {
+    font-size: 32px;
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    line-height: 32px;
+    transform: translateY(-45%);
+    color: #878585;
+    &::before {
+      content: '\f14b';
+    }
+  }
+  &__cover {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+  &__input {
+    position: relative;
+    color: $vGrey;
+    z-index: 101;
+    line-height: 5rem;
+    height: 5rem;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid  $vGrey;
+    text-align: center;
+    font-size: 41px;
+    font-weight: bold;
+
+    &:focus-visible,
+    &:focus, {
+      outline: 0;
+    }
+  }
+}
