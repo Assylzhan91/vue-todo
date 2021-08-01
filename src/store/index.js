@@ -11,7 +11,8 @@ export default createStore({
       }
     ],
     enterTitleTodo: '',
-    idTodo: 1
+    idTodo: 1,
+    closedPopup: false
   },
   mutations: {
     addTodoItem (state, payload) {
@@ -56,6 +57,25 @@ export default createStore({
     },
     setLocalTodoList (state) {
       localStorage.setItem('todoList', JSON.stringify(state.todoList))
+    },
+    popupHandler (state) {
+      if (state.todoList.length) {
+        state.closedPopup = true
+      } else {
+        alert('Todo is empty')
+      }
+    },
+    cancelRemove (state) {
+      state.closedPopup = false
+    },
+    removeAllTodo (state) {
+      if (state.todoList.length) {
+        state.todoList = []
+        state.closedPopup = false
+      }
+    },
+    AllDoneTodo (state) {
+      state.todoList = state.todoList.filter(t => t.isDone)
     }
   },
   getters: {
@@ -65,8 +85,13 @@ export default createStore({
     getEnterTitleTodo: state => {
       return state.enterTitleTodo
     },
-    todoListById: state => id => {
-      return state.todoList.find(todo => todo.id === id)
+    todoListById: s => i => s.todoList.find(t => t.id === i),
+    getClosedPopup: state => {
+      return state.closedPopup
+    },
+    getAllDoneTodo: state => {
+    console.log(state.todoList)
+      // state.todoList.filter(t => t.isDone)
     }
   }
 })

@@ -23,6 +23,11 @@ import VHeader from './components/VHeader'
       }
     },
     computed: {},
+    methods: {
+      someCLick (e) {
+        console.log(e.currentTarget)
+      }
+    },
     components: {
       VToolbar,
       VTodoList,

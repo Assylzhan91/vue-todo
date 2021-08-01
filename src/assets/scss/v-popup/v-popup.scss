@@ -1,0 +1,50 @@
+.v-popup {
+  position: fixed;
+  height: 100vh;
+  background: rgba(#000, .7);
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  &__window {
+    width: $offset-popup;
+    height: 100px;
+    z-index: 1001;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+    left: 50%;
+    margin-left: -($offset-popup/2);
+    top: 10%;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__btn {
+    padding: .4rem 1.5rem;
+    cursor: pointer;
+    border-radius: 6px;
+    color: #fff;
+    line-height: 1.5;
+    font-weight: 700;
+    &.ok {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    &.cancel {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+
+    }
+  }
+}
