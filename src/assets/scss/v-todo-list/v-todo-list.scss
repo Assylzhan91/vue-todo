@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     border-radius: 10px;
+    max-height: 48px;
     background: #fff;
     box-shadow: 0 0 1px rgba(#000, .3%), 0 1px 3px rgba(#000, .26%);
     cursor: pointer;
@@ -26,10 +27,16 @@
     }
   }
 
+  &__edit,
   &__text {
     font-size: 24px;
     font-style: italic;
-    &.completed {
+    flex-grow: 1;
+    width: 100%;
+    padding: 0;
+  }
+  &__text {
+    .completed {
       text-decoration: line-through;
     }
   }
@@ -75,4 +82,16 @@
     }
   }
 
+  &__edit {
+    border: 0;
+    display: block;
+    outline: none;
+    line-height: 28px;
+    background-color: transparent;
+    color: lighten($vGreen, 1%);
+    &:focus-visible {
+      border: 0;
+      outline: none;
+    }
+  }
 }

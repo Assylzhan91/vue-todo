@@ -1,8 +1,8 @@
 <template>
-  <div class="btn-wrapper">
+  <div :class="getClassWrapper">
     <button class="v-icon"
             :class="getClassNames"
-            @click="$emit('handler')"
+            @click.prevent="$emit('handler')"
     >
       {{ text }}
     </button>

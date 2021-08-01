@@ -4,9 +4,6 @@
       v-for="item of todoList"
       :todo="item"
       :key="item.id"
-      @checked="checkedHandler(item.id)"
-      @remove="removeHandler(item.id)"
-      @edit="editHandler"
     />
     </ul>
     <div v-else>

@@ -22,7 +22,7 @@ $margin: mt, mr, mb, ml, m;
 
     @else if $val == ml {
       .#{$val}-#{$i*10/2} {
-        margin-bottom: #{$i * 0.5}rem;
+        margin-left: #{$i * 0.5}rem;
       }
     }
 

@@ -1,5 +1,6 @@
 import VListItem from './index'
 import VButton from '../../V-Button'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'VListItem',
@@ -9,7 +10,14 @@ export default {
       default: () => ({})
     }
   },
+  mounted () {
+    this.setLocalTodoList()
+  },
   computed: {
+    ...mapGetters([
+      'todoListById',
+      'todoList'
+    ]),
     setCheckedTodo () {
       return {
         checked: this.todo.isDone
@@ -17,15 +25,20 @@ export default {
     }
   },
   methods: {
-    // editHandler () {
-    //   console.log('editHandler')
-    // },
-    // removeHandler () {
-    //   console.log('removeHandler')
-    // },
-    // checkedHandler () {
-    //   this.todo.isDone = !this.todo.isDone
-    // }
+    ...mapMutations([
+      'checkedHandler',
+      'deleteHandler',
+      'editHandler',
+      'setLocalTodoList'
+    ]),
+    editHandlerBtn (id) {
+      const item = this.todoListById(id)
+      item.isEdited = !item.isEdited
+      this.$nextTick(() => { this.$refs.edited.focus() })
+    }
+  },
+  updated () {
+    // this.setLocalTodoList()
   },
   components: {
     VListItem,

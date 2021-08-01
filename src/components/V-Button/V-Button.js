@@ -7,6 +7,9 @@ export default {
     classNames: {
       type: String
     },
+    classWrapper: {
+      type: String
+    },
     text: {
       type: String
     }
@@ -17,6 +20,9 @@ export default {
         this.classNames,
         this.typeButton
       ]
+    },
+    getClassWrapper () {
+      return this.classWrapper ? this.classWrapper : 'btn-wrapper'
     }
   }
 }
