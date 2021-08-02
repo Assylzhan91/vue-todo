@@ -6,9 +6,9 @@ export default {
   name: 'VToolbar',
   computed: {
     ...mapGetters([
-      'getClosedPopup',
-      'allDoneTodo',
-      'allTodo'
+      'getToolbarItems',
+      'getToolbarItemsById',
+      'getClosedPopup'
     ])
   },
   methods: {
@@ -17,6 +17,9 @@ export default {
     ]),
     popupHandler () {
       this.$store.dispatch('popupHandler2')
+    },
+    handlerAll (id) {
+      this.$store.dispatch('actionAllTodo', id)
     }
   },
   watch: {

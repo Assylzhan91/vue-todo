@@ -3,13 +3,45 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     todoList: [],
+    todoListDone: [],
+    todoListActive: [],
     enterTitleTodo: '',
     idTodo: 1,
-    closedPopup: false
+    closedPopup: false,
+    toolbarItems: [
+      {
+        text: 'All',
+        isActive: true,
+        list: 'todoList'
+      },
+      {
+        text: 'Done',
+        isActive: false,
+        list: 'todoListDone'
+      },
+      {
+        text: 'Active',
+        isActive: false,
+        list: 'todoListActive'
+      }
+    ]
   },
   mutations: {
     setLocalStorage (state) {
       localStorage.setItem('todoList', JSON.stringify(state.todoList))
+      localStorage.setItem('toolbarItems', JSON.stringify(state.toolbarItems))
+    },
+    setLocalTodoList (state) {
+      const todoFromLocalStorage = JSON.parse(localStorage.getItem('todoList'))
+      const todoListDone = JSON.parse(localStorage.getItem('todoListDone'))
+      if (todoFromLocalStorage.length) {
+        if (state.toolbarItems[1].isActive) {
+          console.log(state.toolbarItems[1].isActive)
+          state.todoListDone = todoListDone
+        } else {
+          state.todoList = todoFromLocalStorage
+        }
+      }
     },
     addTodoItem (state, payload) {
       try {
@@ -62,14 +94,7 @@ export default createStore({
       const item = state.todoList.find(t => t.id === payload)
       item.isEdited = true
     },
-    setLocalTodoList (state) {
-      const todoFromLocalStorage = JSON.parse(localStorage.getItem('todoList'))
-       if (todoFromLocalStorage.length) {
-         state.todoList = todoFromLocalStorage
-      }
-    },
     popupHandler (state) {
-      console.log('popupHandler')
       state.closedPopup = true
     },
     cancelRemove (state) {
@@ -79,29 +104,48 @@ export default createStore({
       if (state.todoList.length) {
         state.todoList = []
         state.closedPopup = false
-        localStorage.setItem('todoList', JSON.stringify([]))
+        for (let i = 0; i < state.toolbarItems.length; i++) {
+          localStorage.setItem(state.toolbarItems[i].list, JSON.stringify([]))
+        }
+        // localStorage.setItem('todoList', JSON.stringify([]))
+        // localStorage.setItem('toolbarItems', JSON.stringify([]))
+        // localStorage.setItem('toolbarItems', JSON.stringify([]))
       }
     },
-    AllDoneTodo (state) {
-      state.todoList = state.todoList.filter(t => t.isDone)
+    allCommonHandler (state, payload) {
+      state.toolbarItems.map((item, id) => {
+        if (id === payload) item.isActive = true
+        else item.isActive = false
+      })
+    },
+    allTodoOwnHandler (state) {
+      localStorage.setItem('todoListDone', JSON.stringify(state.todoList))
+    },
+    doneTodoOwnHandler (state) {
+      state.todoListDone = state.todoList.filter(item => item.isDone)
+      localStorage.setItem('todoListDone', JSON.stringify(state.todoListDone))
+    },
+    activeTodoOwnHandler (state) {
+      state.todoListActive = state.todoList.filter(item => !item.isDone)
+      localStorage.setItem('todoListActive', JSON.stringify(state.todoListActive))
     }
   },
   getters: {
     todoList: state => {
-      return state.todoList
+      for (let i = 0; i < state.toolbarItems.length; i++) {
+        if (state.toolbarItems[i].isActive) {
+         return state[state.toolbarItems[i].list]
+        }
+      }
     },
+    getTodoListDone: state => state.todoListDone,
     getEnterTitleTodo: state => {
       return state.enterTitleTodo
     },
     todoListById: s => i => s.todoList.find(t => t.id === i),
     getClosedPopup: state => state.closedPopup,
-    allDoneTodo: (state, getters) => {
-    // console.log(state.todoList)
-    //   // state.todoList.filter(t => t.isDone)
-    },
-    allTodo: state => {
-      // state.todoList.filter(t => t.isDone)
-    }
+    getToolbarItems: state => state.toolbarItems,
+    getToolbarItemsById: state => idx => state.toolbarItems.find((item, id) => id === idx)
   },
   actions: {
     removeAllTodo ({ commit }) {
@@ -110,6 +154,7 @@ export default createStore({
     addTodoItem ({ commit, state }) {
       commit('addTodoItem', state.enterTitleTodo)
       commit('setLocalStorage')
+      commit('activeTodoOwnHandler')
     },
     checkedHandler ({ commit }, id) {
       commit('checkedHandler', id)
@@ -128,6 +173,19 @@ export default createStore({
     },
     popupHandler2 ({ commit }) {
       commit('popupHandler')
+    },
+    actionAllTodo ({ commit, getters }, id) {
+      commit('allCommonHandler', id)
+      if (getters.getToolbarItemsById(id).text === 'All') {
+        commit('allTodoOwnHandler')
+      }
+      if (getters.getToolbarItemsById(id).text === 'Done') {
+        commit('doneTodoOwnHandler')
+      }
+      if (getters.getToolbarItemsById(id).text === 'Active') {
+        commit('activeTodoOwnHandler')
+      }
+      commit('setLocalStorage')
     }
   }
 })

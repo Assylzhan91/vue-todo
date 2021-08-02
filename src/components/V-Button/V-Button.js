@@ -5,7 +5,7 @@ export default {
       type: [String, Object]
     },
     classNames: {
-      type: String
+      type: [String, Object]
     },
     classWrapper: {
       type: String
