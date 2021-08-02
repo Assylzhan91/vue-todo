@@ -1,13 +1,20 @@
 import VListItem from './components'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'VTodoList',
   mounted () {
+    this.setLocalTodoList()
+  },
+  methods: {
+    ...mapMutations([
+      'setLocalTodoList'
+    ])
   },
   computed: {
-    todoList () {
-     return this.$store.state.todoList
-    }
+    ...mapGetters([
+      'todoList'
+    ])
   },
   components: {
     VListItem

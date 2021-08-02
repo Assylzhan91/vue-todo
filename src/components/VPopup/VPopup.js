@@ -5,9 +5,11 @@ export default {
   name: 'VToolbar',
   methods: {
     ...mapMutations([
-      'cancelRemove',
-      'removeAllTodo'
-    ])
+      'cancelRemove'
+    ]),
+    removeAllTodo () {
+      this.$store.dispatch('removeAllTodo')
+    }
   },
   components: {
     VButton

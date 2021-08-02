@@ -4,7 +4,7 @@
     <v-header-title/>
     <v-form/>
     <v-todo-list/>
-    <v-toolbar/>
+    <v-toolbar v-if="$store.state.todoList.length"/>
   </div>
 </template>
 
@@ -20,12 +20,6 @@ import VHeader from './components/VHeader'
     data () {
       return {
         imgUrl: 'assets/images/night.jpg'
-      }
-    },
-    computed: {},
-    methods: {
-      someCLick (e) {
-        console.log(e.currentTarget)
       }
     },
     components: {

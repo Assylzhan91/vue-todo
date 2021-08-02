@@ -2,28 +2,25 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    todoList: [
-      {
-        id: 1,
-        description: 'Todo 1',
-        isDone: true,
-        isEdited: false
-      }
-    ],
+    todoList: [],
     enterTitleTodo: '',
     idTodo: 1,
     closedPopup: false
   },
   mutations: {
+    setLocalStorage (state) {
+      localStorage.setItem('todoList', JSON.stringify(state.todoList))
+    },
     addTodoItem (state, payload) {
       try {
         if (!payload.length) {
           throw new Error('Please, enter title todo at least 1 character')
         }
+        const firstCharacterToUpper = payload.charAt(0).toUpperCase() + payload.slice(1)
         if (!state.todoList.length) {
           state.todoList.push({
             id: 1,
-            description: payload,
+            description: firstCharacterToUpper,
             isDone: false,
             isEdited: false
           })
@@ -31,7 +28,7 @@ export default createStore({
           const lastTodoItem = state.todoList[state.todoList.length - 1]
           state.todoList.push({
             id: lastTodoItem.id + 1,
-            description: payload,
+            description: firstCharacterToUpper,
             isDone: false,
             isEdited: false
           })
@@ -53,17 +50,27 @@ export default createStore({
     },
     editHandler (state, payload) {
       const idx = state.todoList.find(item => item.id === payload)
-      idx.isEdited = false
+      const getItemLocalTodo = JSON.parse(localStorage.getItem('todoList')).find(item => item.id === payload)
+      if (idx.description.length) {
+        idx.isEdited = false
+      } else {
+        alert('Please, edit at least 1  character')
+        idx.description = getItemLocalTodo.description
+      }
+    },
+    editHandlerBtn (state, payload) {
+      const item = state.todoList.find(t => t.id === payload)
+      item.isEdited = true
     },
     setLocalTodoList (state) {
-      localStorage.setItem('todoList', JSON.stringify(state.todoList))
+      const todoFromLocalStorage = JSON.parse(localStorage.getItem('todoList'))
+       if (todoFromLocalStorage.length) {
+         state.todoList = todoFromLocalStorage
+      }
     },
     popupHandler (state) {
-      if (state.todoList.length) {
-        state.closedPopup = true
-      } else {
-        alert('Todo is empty')
-      }
+      console.log('popupHandler')
+      state.closedPopup = true
     },
     cancelRemove (state) {
       state.closedPopup = false
@@ -72,6 +79,7 @@ export default createStore({
       if (state.todoList.length) {
         state.todoList = []
         state.closedPopup = false
+        localStorage.setItem('todoList', JSON.stringify([]))
       }
     },
     AllDoneTodo (state) {
@@ -86,12 +94,40 @@ export default createStore({
       return state.enterTitleTodo
     },
     todoListById: s => i => s.todoList.find(t => t.id === i),
-    getClosedPopup: state => {
-      return state.closedPopup
+    getClosedPopup: state => state.closedPopup,
+    allDoneTodo: (state, getters) => {
+    // console.log(state.todoList)
+    //   // state.todoList.filter(t => t.isDone)
     },
-    getAllDoneTodo: state => {
-    console.log(state.todoList)
+    allTodo: state => {
       // state.todoList.filter(t => t.isDone)
+    }
+  },
+  actions: {
+    removeAllTodo ({ commit }) {
+      commit('removeAllTodo')
+    },
+    addTodoItem ({ commit, state }) {
+      commit('addTodoItem', state.enterTitleTodo)
+      commit('setLocalStorage')
+    },
+    checkedHandler ({ commit }, id) {
+      commit('checkedHandler', id)
+      commit('setLocalStorage')
+    },
+    deleteHandler ({ commit }, id) {
+      commit('deleteHandler', id)
+      commit('setLocalStorage')
+    },
+    editHandler ({ commit }, id) {
+      commit('editHandler', id)
+      commit('setLocalStorage')
+    },
+    editHandlerBtn1 ({ commit }, id) {
+       commit('editHandlerBtn', id)
+    },
+    popupHandler2 ({ commit }) {
+      commit('popupHandler')
     }
   }
 })

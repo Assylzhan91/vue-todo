@@ -5,19 +5,18 @@
     />
     <div class="v-toolbar__item">
       <v-button
-        text="Done"
+        text="All"
         classWrapper="d-flex"
         classNames="v-toolbar__button"
-        @handler="AllDoneTodo"
+        @handler="allTodo"
       />
-<!--      <button class="v-toolbar__button v-toolbar__button&#45;&#45;active">All</button>-->
     </div>
     <div class="v-toolbar__item">
       <v-button
         text="Done"
         classWrapper="d-flex"
         classNames="v-toolbar__button"
-        @handler="AllDoneTodo"
+        @handler="allDoneTodo"
       />
     </div>
     <div class="v-toolbar__item">

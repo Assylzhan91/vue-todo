@@ -26,19 +26,22 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'checkedHandler',
-      'deleteHandler',
-      'editHandler',
       'setLocalTodoList'
     ]),
+    editHandler (id) {
+      this.$store.dispatch('editHandler', id)
+    },
+
     editHandlerBtn (id) {
-      const item = this.todoListById(id)
-      item.isEdited = !item.isEdited
+      this.$store.dispatch('editHandlerBtn1', id)
       this.$nextTick(() => { this.$refs.edited.focus() })
+    },
+    checkedHandler (id) {
+      this.$store.dispatch('checkedHandler', id)
+    },
+    deleteHandler (id) {
+      this.$store.dispatch('deleteHandler', id)
     }
-  },
-  updated () {
-    // this.setLocalTodoList()
   },
   components: {
     VListItem,

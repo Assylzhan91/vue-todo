@@ -7,26 +7,29 @@ export default {
   computed: {
     ...mapGetters([
       'getClosedPopup',
-      'getAllDoneTodo'
+      'allDoneTodo',
+      'allTodo'
     ])
   },
   methods: {
     ...mapMutations([
-      'popupHandler',
-      'AllDoneTodo'
-    ])
-  },
-  components: {
-    VButton,
-    VPopup
+      'popupHandler'
+    ]),
+    popupHandler () {
+      this.$store.dispatch('popupHandler2')
+    }
   },
   watch: {
-    getClosedPopup: function (val) {
+    getClosedPopup: (val) => {
       if (val) {
         document.body.classList.add('anchor')
       } else {
         document.body.classList.remove('anchor')
       }
     }
+  },
+  components: {
+    VButton,
+    VPopup
   }
 }

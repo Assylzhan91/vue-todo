@@ -12,8 +12,10 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'addTodoItem'
-    ])
+    ]),
+    addTodoItem (enterTitleTodo) {
+      this.$store.dispatch('addTodoItem', enterTitleTodo)
+    }
   },
   components: {
     VButton
